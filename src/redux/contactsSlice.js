@@ -1,6 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
 
-import { getContacts, postContact, deleteContactById } from "./operations";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 
 import { handlePending, handleFulfilled, handleRejected } from "./asyncHandlers";
 
@@ -13,13 +13,13 @@ const contactsSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(getContacts.fulfilled, (state, {payload}) => {
+            .addCase(fetchContacts.fulfilled, (state, {payload}) => {
                 state.contacts = payload;
             })
-            .addCase(postContact.fulfilled, (state, {payload}) => {
+            .addCase(addContact.fulfilled, (state, {payload}) => {
                 state.contacts.push(payload);
             })
-            .addCase(deleteContactById.fulfilled, (state, {payload}) => {
+            .addCase(deleteContact.fulfilled, (state, {payload}) => {
                 state.contacts = state.contacts.filter(contact => contact.id !== payload.id);
             })
             .addMatcher((action) => action.type.endsWith("/pending"), handlePending)

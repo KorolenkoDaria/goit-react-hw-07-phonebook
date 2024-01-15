@@ -2,11 +2,11 @@ import { Item, Name, Number, Button } from "./ContactItem.styled";
 
 import { useDispatch } from "react-redux";
 
-import { deleteContactById } from "../../redux/operations";
+import { deleteContact } from "../../redux/operations";
 
 const ContactItem = ({ name, number, id }) => {
     const dispatch = useDispatch();
-    const handleDelete = () => dispatch(deleteContactById(id));
+    const handleDelete = () => dispatch(deleteContact(id));
 
     return (
 

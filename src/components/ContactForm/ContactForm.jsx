@@ -4,7 +4,7 @@ import { Label, Input, Form, Field, Button } from "./ContactForm.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from '../../redux/selectors';
 
-import { postContact } from "../../redux/operations";
+import { addContact } from "../../redux/operations";
 
 const ContactForm = () => {
 
@@ -25,20 +25,22 @@ const ContactForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
     const contactData = {
       name,
       number,
     }
+    
     const addedContacts = contacts.find(contact => contact.name === contactData.name);
     if (addedContacts) {
       return alert(`${contactData.name} is already in contacts!`);
     }
-    dispatch(postContact(contactData));
+
+    dispatch(addContact (contactData));
 
     setName('');
     setNumber('');
   }
-  /*  dispatch(addContact(fetchContacts())); */
 
   return (
     <Form onSubmit={handleSubmit}>
